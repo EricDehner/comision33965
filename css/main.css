@@ -1,0 +1,160 @@
+/*reset*/
+* {
+    margin: 0;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+/*fondo web*/
+.base_web {
+    background-image: url(/imagenes/fondo/fondo.png);
+    background-size: auto;
+    font-size: 19px;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content auto max-content;
+}
+
+/*footer*/
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(73, 73, 73, 0.16);
+}
+
+.footer_item {
+    display: flex;
+    align-items: center;
+    padding: 0rem .5rem;
+}
+
+.footer_item-icon {
+    padding: .5rem;
+    color: #393939;
+    font-size: 1rem;
+}
+
+.footer_item-item {
+    display: flex;
+    align-items: center;
+    color: #393939;
+    font-family: "Koulen", cursive;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.footer_item-item:hover {
+    text-decoration: none;
+    color: black;
+}
+
+/*header*/
+.navbar {
+    width: 100%;
+}
+
+.navbar_color {
+    background-color: rgba(197, 200, 172, 0.808);
+}
+
+.navbar_color-dropdown {
+    background-color: rgba(197, 200, 172, 0.808);
+    border: 1px #c5c8ac;
+    border-radius: 5px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand {
+    font-family: "Dancing Script", cursive;
+    font-size: 2rem;
+}
+
+.navbar .space_item-dropdown,
+.navbar .space_item {
+    font-size: 20px;
+    font-family: "Bebas Neue", cursive;
+}
+
+.navbar .space_item {
+    padding: 0rem .7rem;
+}
+
+/*sombras*/
+.boxShadow {
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/*produtos*/
+.productos_container {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 440px) {
+    .productos_container {
+        width: 280px;
+    }
+}
+
+.productos_container:hover {
+    transform: scale(1.009);
+}
+
+.productos_img {
+    max-width: 400px;
+    margin: 1.2rem;
+}
+
+@media screen and (max-width: 485px) {
+    .productos_img {
+        width: 280px;
+    }
+}
+
+.productos_titulo {
+    font-size: 2rem;
+    font-family: "Dancing Script", cursive;
+    padding: 2rem;
+    text-align: center;
+}
+
+.productos_intro {
+    position: fixed;
+    bottom: 5%;
+    right: 15px;
+    width: 14rem;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgba(34, 34, 34, 0.091);
+    border-radius: 5px;
+    padding: .5rem;
+    font-family: "Finlandica", sans-serif;
+    font-size: 1.2rem;
+    background-color: rgba(203, 203, 174, 0.817);
+    color: #4d4d4d;
+}
+
+.productos_img-modal {
+    width: 100%;
+    height: auto;
+}
+
+.modal-footer {
+    flex-wrap: nowrap;
+}
+
+.btn-primario {
+    background-color: rgba(197, 200, 172, 0.808);
+}
+
+.modal-body {
+    padding: 2px;
+    border-radius: 4px;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.72);
+}
