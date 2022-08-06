@@ -105,7 +105,7 @@
 
 .productos_img {
     max-width: 400px;
-    margin: 1.2rem;
+    margin: 1rem;
 }
 
 @media screen and (max-width: 485px) {
@@ -157,4 +157,29 @@
     padding: 2px;
     border-radius: 4px;
     box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.72);
+}
+
+#cartas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card{
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.216);
+    background-color: rgba(227, 227, 227, 0.22);
+    width: max-content;
+    margin: 1.2rem;
+}
+
+.card.title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.talles{
+    text-align: center;
+    margin: .9rem
+    ;
 }
