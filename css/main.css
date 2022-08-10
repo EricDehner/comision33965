@@ -183,3 +183,14 @@
     margin: .9rem
     ;
 }
+
+.boton{
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    padding: .5rem 1rem;
+    margin: 2rem;
+    width: 15rem;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.216);
+    background-color: rgba(227, 227, 227, 0.22);
+}

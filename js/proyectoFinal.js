@@ -69,6 +69,13 @@ function ingreso() {
     `;
             cartas.append(carta);
         }
+        let botonPrecio = document.getElementById(`botonPrecio`);
+        botonPrecio.addEventListener(`click`, precio)
+        function precio(){
+            calcularPrecio();
+        }
+
+
         let agregarCarrito1 = document.getElementById(`agregarCarrito1`);
         agregarCarrito1.addEventListener(`click`, interactuar1)
         function interactuar1() {
@@ -76,7 +83,7 @@ function ingreso() {
             const precios = productos.map((el) => el.precio)
             precioCarrito.push(precios[0]);
             //console.log(precioCarrito);
-            calcularPrecio();
+            //calcularPrecio();
         }
         let agregarCarrito2 = document.getElementById(`agregarCarrito2`);
         agregarCarrito2.addEventListener(`click`, interactuar2)
@@ -85,7 +92,7 @@ function ingreso() {
             const precios = productos.map((el) => el.precio)
             precioCarrito.push(precios[1]);
             //console.log(precioCarrito);
-            calcularPrecio();
+            //calcularPrecio();
         }
         let agregarCarrito3 = document.getElementById(`agregarCarrito3`);
         agregarCarrito3.addEventListener(`click`, interactuar3)
@@ -94,7 +101,7 @@ function ingreso() {
             const precios = productos.map((el) => el.precio)
             precioCarrito.push(precios[2]);
             //console.log(precioCarrito);
-            calcularPrecio();
+            //calcularPrecio();
         }
         let agregarCarrito4 = document.getElementById(`agregarCarrito4`);
         agregarCarrito4.addEventListener(`click`, interactuar4)
@@ -103,7 +110,7 @@ function ingreso() {
             const precios = productos.map((el) => el.precio)
             precioCarrito.push(precios[3]);
             //console.log(precioCarrito);
-            calcularPrecio();
+            //calcularPrecio();
         }
     }
     //si el nombre fue "", solicita ingresar nuevamente nombre.
