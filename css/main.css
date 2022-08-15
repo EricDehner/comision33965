@@ -194,3 +194,38 @@
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.216);
     background-color: rgba(227, 227, 227, 0.22);
 }
+.btn-largo{
+    width: max-content;
+    font-size: 1.3rem;
+    margin: auto;
+    margin-top: 1.2rem;
+    margin-bottom: 2rem;
+    padding: .4rem 10rem;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.216);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#carrito{
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+}
+.cart_image{
+    position: relative;
+    width: 150px;
+}
+.cart_cont{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.cardCarrito{
+    display: flex;
+   /* justify-content: space-evenly; */
+    margin: .5rem;
+}

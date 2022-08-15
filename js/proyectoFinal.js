@@ -1,122 +1,99 @@
+
 //array
 class Producto {
-    constructor(nombre, precio) {
+    constructor(id, nombre, precio, foto) {
+        this.id = id;
         this.nombre = nombre;
-        this.precio = parseFloat(precio);
+        this.precio = precio;
+        this.foto = foto;
     }
 }
-const productos = [
-    {
-        id: 1,
-        tipo: `Almohadon basico`,
-        precio: 1500,
-        talle: `S, M, L`,
-        img: "./imagenes/productos/almohadones/07.png"
-    },
-    {
-        id: 2,
-        tipo: `Almohadon personalizado`,
-        precio: 1800,
-        talle: `S, M, L`,
-        img: "./imagenes/productos/almohadones/01.png"
-    },
-    {
-        id: 3,
-        tipo: `Barbijo basico`,
-        precio: 400,
-        talle: `S, M, L`,
-        img: "./imagenes/productos/barbijos/4.png"
-    },
-    {
-        id: 4,
-        tipo: `Barbijo personalizado`,
-        precio: 550,
-        talle: `S, M, L`,
-        img: "./imagenes/productos/barbijos/9.png"
-    }
-];
+
+//Declaracion de arrays
+const carrito = [];
+const precioCarrito = [];
 let precioSuma = 0;
-const precioCarrito = []
-function calcularPrecio() {
-    for (let i = 0; i < precioCarrito.length; i++) {
-        precioSuma += precioCarrito[i];
-    }
-    console.log(`Total a pagar: $` + precioSuma);
-}
-//funcion de inicio 
-ingreso();
-function ingreso() {
-    let nameUser = prompt(`¡Bienvenido! Ingrese su nombre, porfavor.`);
-    //si ingresa un nombre que no sea "", muestra productos.
-    if (nameUser !== ``) {
-        //cartel emergente
-        let cartel = document.querySelector(`.productos_intro`);
-        cartel.innerHTML = `${nameUser}, realizando una compra de 2 productos o más, ¡el envío será gratis! `
-        //cards
-        let cartas = document.getElementById(`cartas`)
-        for (const producto of productos) {
-            let carta = document.createElement(`div`);
-            carta.className = `card`;
-            carta.innerHTML = `<img src="${producto.img}" class="productos_img card-img-top" alt="productos">
+const cartas = document.getElementById(`cartas`)
+const contenidoCarrito = document.getElementById(`carrito`)
+const total = document.querySelector(`#totalAPagar`)
+
+
+//Productos
+import { productos } from "./productos.js";
+
+//Ejecución de funciones
+
+cardsProductos();
+calcularPrecio();
+
+
+//Declaracion de funciones
+
+
+function cardsProductos() {
+    for (const producto of productos) {
+        let carta = document.createElement(`div`);
+        carta.className = `card`;
+        carta.innerHTML = `<img src="${producto.img}" class="productos_img card-img-top" alt="productos">
     <div class="card-body">
         <h5 class="d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
         <h6 class="d-flex justify-content-center align-items-center card-title talles">Talles disponibles<br>${producto.talle}</h6>
         <div class="d-flex justify-content-around align-items-center">
             <p class="card-text">$${producto.precio}</p>
-            <button id="agregarCarrito${producto.id}" type="button" class="btn btn-primario"><i class="fa-solid fa-cart-shopping"></i></button>
+            <div>
+            <button id="agregarCarrito${producto.id}" type="button" class="btn btn-primario"><i class="fa-solid fa-cart-plus"></i></button>
+            </div>
         </div>
     </div>
     `;
-            cartas.append(carta);
-        }
-        let botonPrecio = document.getElementById(`botonPrecio`);
-        botonPrecio.addEventListener(`click`, precio)
-        function precio(){
+        cartas.append(carta);
+        // Evento Button 
+        let button = document.getElementById(`agregarCarrito${producto.id}`)
+        button.addEventListener("click", (e) => {
+            e.preventDefault()
+            console.log(`agregaste ${producto.tipo} al carrito.`)
+            carrito.push(producto)
+            console.log(carrito)
+            contCarrito();
             calcularPrecio();
-        }
-
-
-        let agregarCarrito1 = document.getElementById(`agregarCarrito1`);
-        agregarCarrito1.addEventListener(`click`, interactuar1)
-        function interactuar1() {
-            alert(`¡Agregaste Almohadon basico!`)
-            const precios = productos.map((el) => el.precio)
-            precioCarrito.push(precios[0]);
-            //console.log(precioCarrito);
-            //calcularPrecio();
-        }
-        let agregarCarrito2 = document.getElementById(`agregarCarrito2`);
-        agregarCarrito2.addEventListener(`click`, interactuar2)
-        function interactuar2() {
-            alert(`¡Agregaste Almohadon personalizado!`)
-            const precios = productos.map((el) => el.precio)
-            precioCarrito.push(precios[1]);
-            //console.log(precioCarrito);
-            //calcularPrecio();
-        }
-        let agregarCarrito3 = document.getElementById(`agregarCarrito3`);
-        agregarCarrito3.addEventListener(`click`, interactuar3)
-        function interactuar3() {
-            alert(`¡Agregaste Barbijo basico!`)
-            const precios = productos.map((el) => el.precio)
-            precioCarrito.push(precios[2]);
-            //console.log(precioCarrito);
-            //calcularPrecio();
-        }
-        let agregarCarrito4 = document.getElementById(`agregarCarrito4`);
-        agregarCarrito4.addEventListener(`click`, interactuar4)
-        function interactuar4() {
-            alert(`¡Agregaste Barbijo personalizado!`)
-            const precios = productos.map((el) => el.precio)
-            precioCarrito.push(precios[3]);
-            //console.log(precioCarrito);
-            //calcularPrecio();
-        }
-    }
-    //si el nombre fue "", solicita ingresar nuevamente nombre.
-    else {
-        alert(`El nombre ingresado no es valido, por favor intentelo nuevamente.`)
-        ingreso();
+        })
     }
 }
 
+
+//funcion precio carrito
+function calcularPrecio() {
+    const precios = carrito.map(x => x.precio)
+    console.log(precios);
+    precioCarrito.push = (precios)
+
+
+//acá va la suma de precios para mostrarla en el carrito
+
+
+    //console.log(precioCarrito);
+    //parrafo total a pagar
+    if (carrito.length == 0) {
+        total.innerHTML = `<p>¡Su carrito se encuentra vacío!</p>`;
+    } else {
+        total.innerHTML = `<p>Total a apagar $${precios}</p>`;
+    }
+}
+
+function contCarrito() { 
+        for (const producto of carrito) {
+            let contCarrito = document.createElement(`div`);
+            contCarrito.innerHTML = `            <div class=cardCarrito>
+            <img src="${producto.img}" class="cart_image" alt="productos">
+        <div class="cart_cont">
+            <h5 class=" d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
+            <div class="d-flex justify-content-around align-items-center">
+                <p class="card-text">$${producto.precio}</p>
+            </div>
+            </div>
+            </div>
+            <hr>
+        `;
+        contenidoCarrito.append(contCarrito);
+    }
+}

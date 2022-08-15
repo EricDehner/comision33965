@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <title>Comision 33965 - Eric Dehner</title>
     <link rel="icon" href="/imagenes/favicon/Reina-batata.ico">
+        <script defer src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="base_web">
@@ -66,11 +67,42 @@
         <div class="container contenedor overflow-visible">
             <!--Productos-->
             <h2 id="barbijos" class="d-flex justify-content-center productos_titulo">¡Nuestros productos!</h2>
+
+            <!-- Cards productos -->
             <section id="cartas" class="row"></section>
+
+
             <!--Cartel emergente-->
-            <p class="productos_intro boxShadow" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="1000">
+            <p class="productos_intro boxShadow" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="1000">¡Realizando una compra de 2 productos o más, ¡el envío será gratis!
             </p>
-            <button id="botonPrecio" class="boton">Saber monto a pagar.</button>
+            <!-- Button trigger modal -->
+            <button id="botonPrecio" type="button" class="btn btn-primario btn-largo" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"><i class="fa-solid fa-cart-shopping"></i></button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Carrito de compras</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="carrito">
+                            <!-- Lo que se agregue al carrito -->
+                        
+                        </div>
+                        <div id="footer_padre" class="modal-footer d-flex justify-content-around align-items-center">
+                            <p id="totalAPagar"></p>
+                            <div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </main>
@@ -89,7 +121,7 @@
         </div>
     </footer>
     <!--Scripts-->
-    <script src="/js/proyectoFinal.js"></script>
+    <script src="/js/proyectoFinal.js" type="module"></script>
     <script>
         AOS.init();
     </script>
