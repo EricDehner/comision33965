@@ -53,7 +53,7 @@ function cardsProductos() {
             console.log(`agregaste ${producto.tipo} al carrito.`)
             carrito.push(producto)
             console.log(carrito)
-            contCarrito();
+            // contCarrito();
             calcularPrecio();
         })
     }
@@ -76,21 +76,34 @@ function calcularPrecio() {
     carrito.length == 0 ? total.innerHTML = `<p>¡Su carrito se encuentra vacío!</p>` : total.innerHTML = `<p>Total a apagar $${montoTotal}</p>`
 }
 
+
+let btnPrecio = document.getElementById(`botonPrecio`)
+btnPrecio.addEventListener("click", contCarrito)
+
 function contCarrito() {
     for (const producto of carrito) {
         let contCarrito = document.createElement(`div`);
-        contCarrito.innerHTML = `            <div class=cardCarrito>
-            <img src="${producto.img}" class="cart_image" alt="productos">
+        contCarrito.innerHTML = 
+        ` 
+        <div class=cardCarrito>
+        <img src="${producto.img}" class="cart_image" alt="productos">
         <div class="cart_cont">
-            <h5 class=" d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
-            <div class="d-flex justify-content-around align-items-center">
-                <p class="card-text">$${producto.precio}</p>
-            </div>
+        <h5 class=" d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
+        <div class="d-flex justify-content-around align-items-center">
+        <p class="card-text">$${producto.precio}</p>
+                </div>
             </div>
             </div>
             <hr>
-        `;
-        contenidoCarrito.append(contCarrito);
-        return ``;
+            `;
+            contenidoCarrito.append(contCarrito);
+            
+        }
+        
     }
-}
+    
+    let btnCerrar = document.getElementById(`btnCerrar`)
+    btnCerrar.addEventListener(`click`, function () {
+    contenidoCarrito.innerHTML = ``;
+    })
+    
