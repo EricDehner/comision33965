@@ -12,7 +12,6 @@ class Producto {
 //Declaracion de arrays
 const carrito = [];
 const precioCarrito = [];
-let precioSuma = 0;
 const cartas = document.getElementById(`cartas`)
 const contenidoCarrito = document.getElementById(`carrito`)
 const total = document.querySelector(`#totalAPagar`)
@@ -64,26 +63,23 @@ function cardsProductos() {
 //funcion precio carrito
 function calcularPrecio() {
     const precios = carrito.map(x => x.precio)
-    console.log(precios);
+    //console.log(precios);
     precioCarrito.push = (precios)
-
-
-//acá va la suma de precios para mostrarla en el carrito
-
-
+    const {push}=precioCarrito
+    //console.log(push);
     //console.log(precioCarrito);
-    //parrafo total a pagar
-    if (carrito.length == 0) {
-        total.innerHTML = `<p>¡Su carrito se encuentra vacío!</p>`;
-    } else {
-        total.innerHTML = `<p>Total a apagar $${precios}</p>`;
+    const sumaPrecio = (...push) => {
+        return push.reduce((acc, el) => acc + el, 0);
     }
+    let montoTotal = sumaPrecio(...push)
+    console.log(montoTotal);
+    carrito.length == 0 ? total.innerHTML = `<p>¡Su carrito se encuentra vacío!</p>` : total.innerHTML = `<p>Total a apagar $${montoTotal}</p>`
 }
 
-function contCarrito() { 
-        for (const producto of carrito) {
-            let contCarrito = document.createElement(`div`);
-            contCarrito.innerHTML = `            <div class=cardCarrito>
+function contCarrito() {
+    for (const producto of carrito) {
+        let contCarrito = document.createElement(`div`);
+        contCarrito.innerHTML = `            <div class=cardCarrito>
             <img src="${producto.img}" class="cart_image" alt="productos">
         <div class="cart_cont">
             <h5 class=" d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
@@ -95,5 +91,6 @@ function contCarrito() {
             <hr>
         `;
         contenidoCarrito.append(contCarrito);
+        return ``;
     }
 }
