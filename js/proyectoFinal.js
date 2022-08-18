@@ -1,4 +1,3 @@
-
 //array
 class Producto {
     constructor(id, nombre, precio, foto) {
@@ -55,6 +54,7 @@ function cardsProductos() {
             console.log(carrito)
             // contCarrito();
             calcularPrecio();
+            localStorage.setItem("Carrito", JSON.stringify(carrito))
         })
     }
 }
@@ -106,4 +106,3 @@ function contCarrito() {
     btnCerrar.addEventListener(`click`, function () {
     contenidoCarrito.innerHTML = ``;
     })
-    
