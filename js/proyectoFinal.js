@@ -1,4 +1,5 @@
 //array
+
 class Producto {
     constructor(id, nombre, precio, foto) {
         this.id = id;
@@ -9,14 +10,16 @@ class Producto {
 }
 
 //Declaracion de arrays
+
 const carrito = [];
 const precioCarrito = [];
 const cartas = document.getElementById(`cartas`)
 const contenidoCarrito = document.getElementById(`carrito`)
 const total = document.querySelector(`#totalAPagar`)
-
+const btnPrecio = document.getElementById(`botonPrecio`)
 
 //Productos
+
 import { productos } from "./productos.js";
 
 //Ejecución de funciones
@@ -26,7 +29,6 @@ calcularPrecio();
 
 
 //Declaracion de funciones
-
 
 function cardsProductos() {
     for (const producto of productos) {
@@ -46,13 +48,12 @@ function cardsProductos() {
     `;
         cartas.append(carta);
         // Evento Button 
-        let button = document.getElementById(`agregarCarrito${producto.id}`)
+        const button = document.getElementById(`agregarCarrito${producto.id}`)
         button.addEventListener("click", (e) => {
             e.preventDefault()
             console.log(`agregaste ${producto.tipo} al carrito.`)
             carrito.push(producto)
             console.log(carrito)
-            // contCarrito();
             calcularPrecio();
             localStorage.setItem("Carrito", JSON.stringify(carrito))
         })
@@ -63,11 +64,8 @@ function cardsProductos() {
 //funcion precio carrito
 function calcularPrecio() {
     const precios = carrito.map(x => x.precio)
-    //console.log(precios);
     precioCarrito.push = (precios)
-    const {push}=precioCarrito
-    //console.log(push);
-    //console.log(precioCarrito);
+    const { push } = precioCarrito
     const sumaPrecio = (...push) => {
         return push.reduce((acc, el) => acc + el, 0);
     }
@@ -76,15 +74,12 @@ function calcularPrecio() {
     carrito.length == 0 ? total.innerHTML = `<p>¡Su carrito se encuentra vacío!</p>` : total.innerHTML = `<p>Total a apagar $${montoTotal}</p>`
 }
 
-
-let btnPrecio = document.getElementById(`botonPrecio`)
 btnPrecio.addEventListener("click", contCarrito)
 
 function contCarrito() {
     for (const producto of carrito) {
         let contCarrito = document.createElement(`div`);
-        contCarrito.innerHTML = 
-        ` 
+        contCarrito.innerHTML =` 
         <div class=cardCarrito>
         <img src="${producto.img}" class="cart_image" alt="productos">
         <div class="cart_cont">
@@ -96,13 +91,11 @@ function contCarrito() {
             </div>
             <hr>
             `;
-            contenidoCarrito.append(contCarrito);
-            
-        }
-        
+        contenidoCarrito.append(contCarrito);
     }
-    
-    let btnCerrar = document.getElementById(`btnCerrar`)
-    btnCerrar.addEventListener(`click`, function () {
+}
+
+let btnCerrar = document.getElementById(`btnCerrar`)
+btnCerrar.addEventListener(`click`, function () {
     contenidoCarrito.innerHTML = ``;
-    })
+})
