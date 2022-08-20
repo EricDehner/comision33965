@@ -10,20 +10,21 @@ class Producto {
 }
 
 //Declaracion de arrays
-
-const carrito = [];
+const compras = []
+let carrito = [];
 const precioCarrito = [];
 const cartas = document.getElementById(`cartas`)
 const contenidoCarrito = document.getElementById(`carrito`)
-const total = document.querySelector(`#totalAPagar`)
-const btnPrecio = document.getElementById(`botonPrecio`)
-
+const total = document.getElementById(`totalAPagar`)
+const btnPrecio = document.getElementById(`btnCarrito`)
+const btnCompra = document.getElementById(`btnCompra`)
+const btnCerrar = document.getElementById(`btnCerrar`)
 //Productos
 
 import { productos } from "./productos.js";
 
 //Ejecución de funciones
-
+AOS.init();
 cardsProductos();
 calcularPrecio();
 
@@ -34,7 +35,8 @@ function cardsProductos() {
     for (const producto of productos) {
         let carta = document.createElement(`div`);
         carta.className = `card`;
-        carta.innerHTML = `<img src="${producto.img}" class="productos_img card-img-top" alt="productos">
+        carta.innerHTML = `<div>
+        <img src="${producto.img}" class="productos_img card-img-top" alt="productos">
     <div class="card-body">
         <h5 class="d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
         <h6 class="d-flex justify-content-center align-items-center card-title talles">Talles disponibles<br>${producto.talle}</h6>
@@ -45,15 +47,20 @@ function cardsProductos() {
             </div>
         </div>
     </div>
+    </div>
     `;
         cartas.append(carta);
         // Evento Button 
         const button = document.getElementById(`agregarCarrito${producto.id}`)
         button.addEventListener("click", (e) => {
             e.preventDefault()
-            console.log(`agregaste ${producto.tipo} al carrito.`)
+            Swal.fire(
+                `${producto.tipo}`,
+                `Agregado al carrito`,
+                `success`
+            );
             carrito.push(producto)
-            console.log(carrito)
+            //console.log(carrito)
             calcularPrecio();
             localStorage.setItem("Carrito", JSON.stringify(carrito))
         })
@@ -70,8 +77,8 @@ function calcularPrecio() {
         return push.reduce((acc, el) => acc + el, 0);
     }
     let montoTotal = sumaPrecio(...push)
-    console.log(montoTotal);
-    carrito.length == 0 ? total.innerHTML = `<p>¡Su carrito se encuentra vacío!</p>` : total.innerHTML = `<p>Total a apagar $${montoTotal}</p>`
+    //console.log(montoTotal);
+    carrito.length === 0 ? total.innerHTML = `<p>¡Su carrito se encuentra vacío!</p>` : total.innerHTML = `<p>Total a apagar $${montoTotal}</p>`
 }
 
 btnPrecio.addEventListener("click", contCarrito)
@@ -79,7 +86,7 @@ btnPrecio.addEventListener("click", contCarrito)
 function contCarrito() {
     for (const producto of carrito) {
         let contCarrito = document.createElement(`div`);
-        contCarrito.innerHTML =` 
+        contCarrito.innerHTML = ` 
         <div class=cardCarrito>
         <img src="${producto.img}" class="cart_image" alt="productos">
         <div class="cart_cont">
@@ -95,7 +102,33 @@ function contCarrito() {
     }
 }
 
-let btnCerrar = document.getElementById(`btnCerrar`)
+
 btnCerrar.addEventListener(`click`, function () {
     contenidoCarrito.innerHTML = ``;
 })
+
+btnCompra.addEventListener(`click`, function () {
+    carrito.length !== 0 ?
+        //Si el carrito tiene productos y se presiona comprar.
+        Swal.fire(
+            `¡Su compra se ha realizado con exito!`,
+            `No dude en volver a comprarnos`,
+            `success`
+        )
+        :
+        //Si el carrito no posee productos y se presiona comprar. 
+        Swal.fire(
+            `¡Aun no posee productos en su carrito!`,
+            `Seleccione el prodcuto que desee y vuelva a intentarlo`,
+            `error`
+        );
+compras.push(carrito)
+localStorage.setItem("Compra exitosa", JSON.stringify(compras[0]))
+carrito.length = 0;
+contCarrito();
+calcularPrecio();
+})
+
+/*Justificación de librería. 
+
+Utilicé solo SweetAlert porque segun mi criterio es lo mas sutil para las interacciones en las alertas para el contenido de mi pagina.*/

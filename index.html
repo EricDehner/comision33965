@@ -11,18 +11,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://kit.fontawesome.com/b6607543a6.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@700&family=Finlandica:ital@1&family=Koulen&display=swap"
-        rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@700&family=Finlandica:ital@1&family=Koulen&display=swap"
+    rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css">
     <title>Comision 33965 - Eric Dehner</title>
     <link rel="icon" href="/imagenes/favicon/Reina-batata.ico">
-        <script defer src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- SweetAlert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body class="base_web">
@@ -73,10 +74,11 @@
 
 
             <!--Cartel emergente-->
-            <p class="productos_intro boxShadow" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="1000">¡Realizando una compra de 2 productos o más, ¡el envío será gratis!
+            <p class="productos_intro boxShadow" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="1000">
+                ¡Realizando una compra de 2 productos o más, ¡el envío será gratis!
             </p>
             <!-- Button trigger modal -->
-            <button id="botonPrecio" type="button" class="btn btn-primario btn-largo" data-bs-toggle="modal"
+            <button id="btnCarrito" type="button" class="btn btn-primario btn-largo" data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"><i class="fa-solid fa-cart-shopping"></i></button>
 
             <!-- Modal -->
@@ -93,8 +95,9 @@
                         <div id="footer_padre" class="modal-footer d-flex justify-content-around align-items-center">
                             <p id="totalAPagar"></p>
                             <div>
-                                <button id = "btnCerrar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Comprar</button>
+                                <button id="btnCerrar" type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cerrar</button>
+                                <button id="btnCompra" type="button" class="btn btn-primary">Comprar</button>
                             </div>
                         </div>
                     </div>
@@ -120,6 +123,7 @@
     </footer>
     <!--Scripts-->
     <script src="/js/proyectoFinal.js" type="module"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
