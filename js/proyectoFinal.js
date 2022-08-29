@@ -19,17 +19,16 @@ const total = document.getElementById(`totalAPagar`)
 const btnPrecio = document.getElementById(`btnCarrito`)
 const btnCompra = document.getElementById(`btnCompra`)
 const btnCerrar = document.getElementById(`btnCerrar`)
-//Productos
 
-import { productos } from "./productos.js";
 
 //Ejecución de funciones
 AOS.init();
-cardsProductos();
+//cardsProductos();
 calcularPrecio();
 
 
 //Declaracion de funciones
+
 
 function cardsProductos() {
     for (const producto of productos) {
@@ -110,11 +109,7 @@ btnCerrar.addEventListener(`click`, function () {
 btnCompra.addEventListener(`click`, function () {
     carrito.length !== 0 ?
         //Si el carrito tiene productos y se presiona comprar.
-        Swal.fire(
-            `¡Su compra se ha realizado con exito!`,
-            `No dude en volver a comprarnos`,
-            `success`
-        )
+        correct()
         :
         //Si el carrito no posee productos y se presiona comprar. 
         Swal.fire(
@@ -122,13 +117,31 @@ btnCompra.addEventListener(`click`, function () {
             `Seleccione el prodcuto que desee y vuelva a intentarlo`,
             `error`
         );
-compras.push(carrito)
-localStorage.setItem("Compra exitosa", JSON.stringify(compras[0]))
-carrito.length = 0;
-contCarrito();
-calcularPrecio();
 })
 
 /*Justificación de librería. 
-
+ 
 Utilicé solo SweetAlert porque segun mi criterio es lo mas sutil para las interacciones en las alertas para el contenido de mi pagina.*/
+function correct() {
+    Swal.fire(
+        `¡Su compra se ha realizado con exito!`,
+        `No dude en volver a comprarnos`,
+        `success`
+    )
+    compras.push(carrito)
+    contenidoCarrito.innerHTML = ``;
+    localStorage.setItem("Compra exitosa", JSON.stringify(compras[0]))
+    carrito.length = 0;
+    contCarrito();
+    calcularPrecio();
+}
+
+obtenerProductos();
+function obtenerProductos() {
+    const URLJSON="productos.json"
+    fetch(URLJSON)
+        .then(res => res.json())
+        .then(data=>{
+            console.log(data);
+        })
+}
