@@ -23,7 +23,7 @@ const btnCerrar = document.getElementById(`btnCerrar`)
 
 //Ejecución de funciones
 AOS.init();
-//cardsProductos();
+cardsProductos();
 calcularPrecio();
 
 
@@ -31,7 +31,17 @@ calcularPrecio();
 
 
 function cardsProductos() {
-    for (const producto of productos) {
+    obtenerProductos();
+    const URLJSON="js/productos.json"
+    fetch(URLJSON)
+        .then(res => res.json())
+        .then(data=>{
+            console.log(data);
+        })
+
+//no sé como pasar data a que me lo lea el for of
+
+    for (const producto of productoJSON) {
         let carta = document.createElement(`div`);
         carta.className = `card`;
         carta.innerHTML = `<div>
@@ -134,14 +144,4 @@ function correct() {
     carrito.length = 0;
     contCarrito();
     calcularPrecio();
-}
-
-obtenerProductos();
-function obtenerProductos() {
-    const URLJSON="productos.json"
-    fetch(URLJSON)
-        .then(res => res.json())
-        .then(data=>{
-            console.log(data);
-        })
 }
