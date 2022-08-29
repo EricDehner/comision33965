@@ -10,8 +10,9 @@ class Producto {
 }
 
 //Declaracion de arrays
-const compras = []
+const compras = [];
 let carrito = [];
+let productos = [];
 const precioCarrito = [];
 const cartas = document.getElementById(`cartas`)
 const contenidoCarrito = document.getElementById(`carrito`)
@@ -23,25 +24,29 @@ const btnCerrar = document.getElementById(`btnCerrar`)
 
 //Ejecución de funciones
 AOS.init();
-cardsProductos();
+//cardsProductos();
 calcularPrecio();
+obtenerProductos();
 
 
 //Declaracion de funciones
 
 
-function cardsProductos() {
-    obtenerProductos();
+function obtenerProductos() {
     const URLJSON="js/productos.json"
     fetch(URLJSON)
         .then(res => res.json())
         .then(data=>{
             console.log(data);
+            productos=data
+            cardsProductos()
         })
+    }
+    
 
-//no sé como pasar data a que me lo lea el for of
+function cardsProductos() {
 
-    for (const producto of productoJSON) {
+    for (const producto of productos) {
         let carta = document.createElement(`div`);
         carta.className = `card`;
         carta.innerHTML = `<div>
