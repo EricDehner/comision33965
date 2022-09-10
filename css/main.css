@@ -51,13 +51,17 @@
 }
 
 /*header*/
-.navbar {
-    width: 100%;
-}
+
 
 .navbar_color {
-    background-color: rgba(197, 200, 172, 0.808);
+    background-color: rgba(197, 200, 172, 0.97);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.178);
 }
+
 
 .navbar_color-dropdown {
     background-color: rgba(197, 200, 172, 0.808);
@@ -104,7 +108,7 @@
 }
 
 .productos_img {
-    max-width: 400px;
+    max-width: 350px;
     margin: 1rem;
 }
 
@@ -118,13 +122,14 @@
     font-size: 2rem;
     font-family: "Dancing Script", cursive;
     padding: 2rem;
+    margin-top: 5rem;
     text-align: center;
 }
 
 .productos_intro {
     position: fixed;
-    bottom: 5%;
-    right: 15px;
+    bottom: 19%;
+    left: 15px;
     width: 14rem;
     height: max-content;
     display: flex;
@@ -140,8 +145,9 @@
     color: #4d4d4d;
 }
 
+
 .productos_img-modal {
-    width: 100%;
+    width: 750px;
     height: auto;
 }
 
@@ -151,6 +157,14 @@
 
 .btn-primario {
     background-color: rgba(197, 200, 172, 0.808);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.23);
+}
+.btn-primary {
+    background-color: rgba(197, 200, 172, 0.808);
+    border: black;
+}
+.btn-primary:hover {
+    background-color: rgba(162, 164, 143, 0.808);
 }
 
 .modal-body {
@@ -194,19 +208,12 @@
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.216);
     background-color: rgba(227, 227, 227, 0.22);
 }
-.btn-largo{
-    width: max-content;
-    font-size: 1.3rem;
-    margin: auto;
-    margin-top: 1.2rem;
-    margin-bottom: 2rem;
-    padding: .4rem 10rem;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.216);
-}
+
 .container{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 #carrito{
 display: flex;
@@ -228,4 +235,13 @@ justify-content: space-around;
     display: flex;
    /* justify-content: space-evenly; */
     margin: .5rem;
+}
+
+.contenedor{
+    width: 100%;
+}
+
+.navbar-nav{
+    display: flex;
+    align-items: center;
 }
