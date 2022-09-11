@@ -147,17 +147,31 @@
 
 
 .productos_img-modal {
-    width: 750px;
+    width: 794 px;
     height: auto;
 }
 
 .modal-footer {
     flex-wrap: nowrap;
 }
-
+.contenedor_trash{
+    padding-top: 1rem;
+}
+.trash{
+    color: rgba(203, 50, 50, 0.618);
+}
+.trash:hover{
+    color: rgb(203, 50, 50);
+}
 .btn-primario {
     background-color: rgba(197, 200, 172, 0.808);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.23);
+}
+.btn-carrito {
+    color: #565656;
+}
+.btn-carrito:hover {
+    color: #434343;
 }
 .btn-primary {
     background-color: rgba(197, 200, 172, 0.808);
@@ -181,7 +195,7 @@
 
 .card{
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.216);
-    background-color: rgba(227, 227, 227, 0.22);
+    background-color: rgba(255, 255, 255, 0.464);
     width: max-content;
     margin: 1.2rem;
 }
@@ -244,4 +258,7 @@ justify-content: space-around;
 .navbar-nav{
     display: flex;
     align-items: center;
+}
+#swal2-imput{
+    border: 1px solid black;
 }
