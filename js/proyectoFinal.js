@@ -59,7 +59,6 @@ function obtenerProductos() {
     fetch(URLJSON)
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             productos = data
             cardsProductos()
         })
@@ -72,17 +71,17 @@ function cardsProductos() {
         let carta = document.createElement(`div`);
         carta.className = `card`;
         carta.innerHTML = `<div>
-        <a><img src="${producto.img}" class="productos_img card-img-top" alt="productos" data-bs-toggle="modal" data-bs-target="#${producto.id}"></a>
-        <div class="modal fade" id="${producto.id}">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body modal-xl d-flex flex-column">
-                                <img src="${producto.img}" class="gallery-item productos_img-modal"
-                                    alt="gallery">
-                            </div>
-                        </div>
+        <a><img src="${producto.img}" class="productos_img card-img-top" alt="productos" data-bs-toggle="modal" data-bs-target="#_${producto.id}"></a>
+        </div>
+        <div class="modal fade" id="_${producto.id}">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body modal-xl d-flex flex-column">
+                        <img src="${producto.img}" class="gallery-item productos_img-modal" alt="gallery">
                     </div>
                 </div>
+            </div>
+        </div>
     <div class="card-body">
         <h5 class="d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
         <h6 class="d-flex justify-content-center align-items-center card-title talles">Talles disponibles<br>${producto.talle}</h6>
@@ -186,3 +185,5 @@ function correct() {
     contCarrito();
     calcularPrecio();
 }
+
+
