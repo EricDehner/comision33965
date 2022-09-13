@@ -19,7 +19,7 @@ const total = document.getElementById(`totalAPagar`)
 const btnCompra = document.getElementById(`btnCompra`)
 const btnCerrar = document.getElementById(`btnCerrar`)
 const btnPrecio = document.getElementById(`btnCarrito`)
-const btnEliminar = document.getElementById(`btnEliminar`)
+
 const contenidoCarrito = document.getElementById(`carrito`)
 
 
@@ -90,7 +90,7 @@ function cardsProductos() {
             <div>
             <button id="agregarCarrito${producto.id}" type="button" class="btn btn-primario"><i class="fa-solid fa-cart-plus"></i></button>
             </div>
-        </div>
+            </div>
     </div>
     </div>
     `;
@@ -133,23 +133,36 @@ function contCarrito() {
         let contCarrito = document.createElement(`div`);
         contCarrito.innerHTML = ` 
         <div class=cardCarrito>
-            <img src="${producto.img}" class="cart_image" alt="productos">
+        <img src="${producto.img}" class="cart_image" alt="productos">
         <div class="cart_cont">
-            <h5 class=" d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
-            <div class="d-flex justify-content-around align-items-center">
-                <div>
-                <p class="card-text">$${producto.precio}</p>
-                </div>
-            </div>
-            <div class="contenedor_trash">
-            <i onclick="eliminarDelCarrito" id="btnEliminar" class="fa-sharp trash fa-solid fa-trash"></i>
-            </div>
+        <h5 class=" d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
+        <div class="d-flex justify-content-around align-items-center">
+        <div>
+        <p class="card-text">$${producto.precio}</p>
+        </div>
+        </div>
+        <div class="contenedor_trash">
+        <i id="btnEliminarCarrito" class="fa-sharp trash fa-solid fa-trash"></i>
+        </div>
         </div>
         </div>
         <hr>
         `;
         contenidoCarrito.append(contCarrito);
     }
+    btnEli()
+}
+
+function btnEli() {
+    const btnEliminar = document.getElementById(`btnEliminarCarrito`)
+    btnEliminar.addEventListener("click", (nombre) => {
+        const item = carrito.find((carrito) => carrito.id === nombre)
+        const indice = carrito.indexOf(item)
+        carrito.splice(indice, 1)
+        calcularPrecio()
+        contenidoCarrito.innerHTML = ``;
+        contCarrito()
+    })
 }
 
 btnCerrar.addEventListener(`click`, function () {
@@ -169,9 +182,6 @@ btnCompra.addEventListener(`click`, function () {
         );
 })
 
-/*Justificación de librería. 
-
-Utilicé solo SweetAlert porque segun mi criterio es lo mas sutil para las interacciones en las alertas para el contenido de mi pagina.*/
 function correct() {
     Swal.fire(
         `¡Su compra se ha realizado con exito!`,
@@ -185,5 +195,4 @@ function correct() {
     contCarrito();
     calcularPrecio();
 }
-
 
