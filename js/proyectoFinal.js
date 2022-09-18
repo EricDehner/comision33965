@@ -1,5 +1,4 @@
 //array
-
 class Producto {
     constructor(id, nombre, precio, foto) {
         this.id = id;
@@ -18,42 +17,50 @@ const cartas = document.getElementById(`cartas`)
 const total = document.getElementById(`totalAPagar`)
 const btnCompra = document.getElementById(`btnCompra`)
 const btnCerrar = document.getElementById(`btnCerrar`)
-const btnPrecio = document.getElementById(`btnCarrito`)
-
+const btnCarritoModal = document.getElementById(`btnCarrito`)
 const contenidoCarrito = document.getElementById(`carrito`)
-
 
 //Ejecución de funciones
 
 calcularPrecio();
 obtenerProductos();
-
+lsCarrito();
 
 //Declaracion de funciones
-
-const inputValue = ""
-const { value: userName } = await Swal.fire({
-    title: '¡Bienvenido!',
-    input: 'text',
-    inputLabel: '¡Accedé a ofertas increibles! Ingresa tu nombre, por favor.',
-    inputValue: inputValue,
-    background: 'rgba(227, 227, 227, 0.98)',
-    confirmButtonColor: 'rgba(197, 200, 172)',
-    inputValidator: (value) => {
-        if (!value) {
-            return '¡Por favor, ingrese su nombre!'
-        }
+function lsCarrito() {
+    if (localStorage.getItem(`carrito`)) {
+        carrito = JSON.parse(localStorage.getItem(`carrito`))
+        calcularPrecio()
     }
-})
-
-//Si no ingresa su nombre, pierde descuento de envios. 
-if (userName) {
-    Swal.fire(`Hola, ${userName}. ¡Bienvenido!`)
-    let cartel = document.querySelector(`.intro`);
-    cartel.innerHTML = `<p class="productos_intro boxShadow" data-aos="fade-right" data-aos-delay="3000" data-aos-duration="1000">
-    ${userName}, ¡Realizando una compra de 5 productos o más, el envío será gratis! </p>`
 }
 
+//SweatAlert con imput. 
+SAInput()
+async function SAInput() {
+    const inputValue = ""
+    const { value: userName } = await Swal.fire({
+        title: '¡Bienvenido!',
+        input: 'text',
+        inputLabel: '¡Accedé a ofertas increibles! Ingresa tu nombre, por favor.',
+        inputValue: inputValue,
+        background: 'rgba(227, 227, 227, 0.98)',
+        confirmButtonColor: 'rgba(197, 200, 172)',
+        inputValidator: (value) => {
+            if (!value) {
+                return '¡Por favor, ingrese su nombre!'
+            }
+        }
+    })
+    //Si no ingresa su nombre, pierde descuento de envios. 
+    if (userName) {
+        Swal.fire(`Hola, ${userName}. ¡Bienvenido!`)
+        let cartel = document.querySelector(`.intro`);
+        cartel.innerHTML = `<p class="productos_intro boxShadow" data-aos="fade-right" data-aos-delay="3000" data-aos-duration="1000">
+        ${userName}, ¡Realizando una compra de 5 productos o más, el envío será gratis! </p>`
+    }
+}
+
+//JSON con productos.
 function obtenerProductos() {
     const URLJSON = "js/productos.json"
     fetch(URLJSON)
@@ -64,9 +71,8 @@ function obtenerProductos() {
         })
 }
 
-
+//Renderizado de cards
 function cardsProductos() {
-
     for (const producto of productos) {
         let carta = document.createElement(`div`);
         carta.className = `card`;
@@ -74,26 +80,26 @@ function cardsProductos() {
         <a><img src="${producto.img}" class="productos_img card-img-top" alt="productos" data-bs-toggle="modal" data-bs-target="#_${producto.id}"></a>
         </div>
         <div class="modal fade" id="_${producto.id}">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body modal-xl d-flex flex-column">
                         <img src="${producto.img}" class="gallery-item productos_img-modal" alt="gallery">
                     </div>
-                </div>
-            </div>
-        </div>
+                    </div>
+                    </div>
+                    </div>
     <div class="card-body">
         <h5 class="d-flex justify-content-center align-items-center card-title">${producto.tipo}</h5>
         <h6 class="d-flex justify-content-center align-items-center card-title talles">Talles disponibles<br>${producto.talle}</h6>
         <div class="d-flex justify-content-around align-items-center">
-            <p class="card-text">$${producto.precio}</p>
-            <div>
-            <button id="agregarCarrito${producto.id}" type="button" class="btn btn-primario"><i class="fa-solid fa-cart-plus"></i></button>
-            </div>
-            </div>
-    </div>
-    </div>
-    `;
+        <p class="card-text">$${producto.precio}</p>
+        <div>
+        <button id="agregarCarrito${producto.id}" type="button" class="btn btn-primario"><i class="fa-solid fa-cart-plus"></i></button>
+        </div>
+        </div>
+        </div>
+        </div>
+        `;
         cartas.append(carta);
         // Evento Button 
         const button = document.getElementById(`agregarCarrito${producto.id}`)
@@ -107,11 +113,25 @@ function cardsProductos() {
             carrito.push(producto)
             //console.log(carrito)
             calcularPrecio();
-            localStorage.setItem("Carrito", JSON.stringify(carrito))
         })
     }
 }
 
+//Dibujar boton vaciar carrito
+function BotonVaciar() {
+    const headerModal = document.getElementById(`emptyCart`)
+    let btnVaciar = document.createElement(`div`)
+    btnVaciar.innerHTML = `<button type="button" id="VaciarCarrito" class="btn btn-secondary btnEmpty">Vaciar Carrito</button>`;
+    headerModal.appendChild(btnVaciar);
+    const vaciarCarrito = document.getElementById(`VaciarCarrito`)
+    //Boton vaciar carrito
+    vaciarCarrito.addEventListener("click", () => {
+        carrito.length = 0
+        contenidoCarrito.innerHTML = ``;
+        contCarrito()
+        calcularPrecio()
+    })
+}
 
 //funcion precio carrito
 function calcularPrecio() {
@@ -122,12 +142,11 @@ function calcularPrecio() {
         return push.reduce((acc, el) => acc + el, 0);
     }
     let montoTotal = sumaPrecio(...push)
-    //console.log(montoTotal);
     carrito.length === 0 ? total.innerHTML = `<p>¡Su carrito se encuentra vacío!</p>` : total.innerHTML = `<p>Total a pagar $${montoTotal}</p>`
 }
 
-btnPrecio.addEventListener("click", contCarrito)
-
+//renderizado del modal carrito
+btnCarritoModal.addEventListener("click", contCarrito)
 function contCarrito() {
     for (const producto of carrito) {
         let contCarrito = document.createElement(`div`);
@@ -141,34 +160,25 @@ function contCarrito() {
         <p class="card-text">$${producto.precio}</p>
         </div>
         </div>
-        <div class="contenedor_trash">
-        <i id="btnEliminarCarrito" class="fa-sharp trash fa-solid fa-trash"></i>
-        </div>
         </div>
         </div>
         <hr>
         `;
         contenidoCarrito.append(contCarrito);
     }
-    btnEli()
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+    //Aparece boton vaciar carrito. 
+    if (carrito.length !== 0) {
+        BotonVaciar()
+    }
 }
 
-function btnEli() {
-    const btnEliminar = document.getElementById(`btnEliminarCarrito`)
-    btnEliminar.addEventListener("click", (nombre) => {
-        const item = carrito.find((carrito) => carrito.id === nombre)
-        const indice = carrito.indexOf(item)
-        carrito.splice(indice, 1)
-        calcularPrecio()
-        contenidoCarrito.innerHTML = ``;
-        contCarrito()
-    })
-}
-
+//Vaciador de carrito al cerrar el modal
 btnCerrar.addEventListener(`click`, function () {
     contenidoCarrito.innerHTML = ``;
 })
 
+//Ternario para habilitar compra.
 btnCompra.addEventListener(`click`, function () {
     carrito.length !== 0 ?
         //Si el carrito tiene productos y se presiona comprar.
@@ -182,6 +192,7 @@ btnCompra.addEventListener(`click`, function () {
         );
 })
 
+//SweatAlert para la compra realizada.
 function correct() {
     Swal.fire(
         `¡Su compra se ha realizado con exito!`,
@@ -194,5 +205,5 @@ function correct() {
     carrito.length = 0;
     contCarrito();
     calcularPrecio();
+    localStorage.removeItem("carrito", JSON.stringify(carrito))
 }
-

@@ -284,3 +284,24 @@
 #swal2-imput {
     border: 1px solid black;
 }
+
+.btnEmpty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .2rem .6rem;
+    border: 0;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    background-color: #4d4d4d5f;
+    color: white;
+    transition: background-color, ease-in-out .2s;
+}
+.btnEmpty:hover{
+    background-color: #4d4d4d7c;
+}
+
+.modal-header{
+    display: flex;
+    align-items: center;
+}
