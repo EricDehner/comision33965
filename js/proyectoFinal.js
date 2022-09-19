@@ -119,12 +119,9 @@ function cardsProductos() {
 
 //Dibujar boton vaciar carrito
 function BotonVaciar() {
-    const headerModal = document.getElementById(`emptyCart`)
-    let btnVaciar = document.createElement(`div`)
-    btnVaciar.innerHTML = `<button type="button" id="VaciarCarrito" class="btn btn-secondary btnEmpty">Vaciar Carrito</button>`;
-    headerModal.appendChild(btnVaciar);
     const vaciarCarrito = document.getElementById(`VaciarCarrito`)
-    //Boton vaciar carrito
+    vaciarCarrito.style.display = carrito.length === 0 ? 'none' : 'block'
+    // Boton vaciar carrito
     vaciarCarrito.addEventListener("click", () => {
         carrito.length = 0
         contenidoCarrito.innerHTML = ``;
@@ -168,14 +165,13 @@ function contCarrito() {
     }
     localStorage.setItem("carrito", JSON.stringify(carrito))
     //Aparece boton vaciar carrito. 
-    if (carrito.length !== 0) {
-        BotonVaciar()
-    }
+    BotonVaciar()
 }
 
 //Vaciador de carrito al cerrar el modal
 btnCerrar.addEventListener(`click`, function () {
     contenidoCarrito.innerHTML = ``;
+    btnVaciar.innerHTML = ``;
 })
 
 //Ternario para habilitar compra.
